@@ -7,7 +7,6 @@ function UserInputForm(props) {
     const zipCodeRef = useRef();
     const priceRef = useRef();
     const cuisineRef = useRef();
-    console.log('hi');
 
     function findRestaurantHandler (event) {
         event.preventDefault();
@@ -22,7 +21,6 @@ function UserInputForm(props) {
             location: enteredZip,
         };
 
-        console.log(userInputData);
         props.onGetData(userInputData);
 
     }

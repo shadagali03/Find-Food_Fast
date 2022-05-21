@@ -1,55 +1,33 @@
-// import RestaurantsData from "../Components/RestaurantsData";
+import RestaurantsData from "../Components/RestaurantsData";
 import { useEffect, useState } from "react";
 import UserInputForm from "../Components/UserInputForm";
-import yelp from 'yelp-fusion'
+import { useYelpSearch } from "../Hooks/Yelp-API/useYelpSearch";
 function Home () {
     const [isLoading, setIsLoading] = useState(true);
-    const [loadedData, setLoadedData] = useState([]);
-    const [gotFormData, setFormData] = useState({})
-    const API_KEY = 'v6uAY_EgJkxbvU6UhHKsiq_c56ikKv9Sa4ucIJMol5xcuhu2d8hZC8cihGU_bwrroN7PZuMq9Zqu25t6abk4hDzhlWi0nVFn4pBeCMo32qYPGRAqusOyEQ4Ga8mHYnYx'
+    const [FormData, setFormData] = useState({})
+    const [Restaurant, searchParams, setSearchParams] = useYelpSearch('indian', '08536', '1');
+    //const [Restaurant, searchParams, setSearchParams] = useYelpSearch(FormData.term, FormData.location, FormData.price);
+    console.log(isLoading)
 
-    //     useEffect(() => {
-    //         console.log(gotFormData)
-    //         setIsLoading(true);
-    //         fetch(`https://cors-anywhere.herokuapp.com/https://api.yelp.com/v3/businesses/north-india-restaurant-san-francisco`,{
-    //             headers: {
-    //                 Authorization: `Bearer ${API_KEY}`,
-    //                 Origin: 'localhost',
-    //                 withCredentials: true,
-    //             }
-    //         }).then((response) => {
-    //             return response.json();
-    //         }).then((data) => {
-    //             const formatted = data.businesses[0];
-    //             const restaurantData = {
-    //                 title: formatted.name,
-    //                 address: formatted.display_address,
-    //                 image: formatted.image_url,
-    //                 description: formatted.rating
-    //             }
+    function getRestaurantData (RestaurantData) {
+        setFormData(RestaurantData)
+        console.log(FormData)
+        setIsLoading(false);
+    }
 
-    //             setIsLoading(false);
-    //             setLoadedData(restaurantData);
-    //         })
-    //     }, [gotFormData])
-
-    //     function getRestaurantData (RestaurantData) {
-    //         console.log(RestaurantData)
-    //         setFormData(RestaurantData)
-    //     }
-
-    // if (isLoading) {
-    //     return (
-    //         <UserInputForm onGetData={getRestaurantData} />
-    //     )
-    // }
+    if (isLoading) {
+        return (
+            <UserInputForm onGetData={getRestaurantData}/> 
+        );     
+    }
+    else {
     return (
-        // <UserInputForm onGetData={getRestaurantData}/>
-        // {/* <RestaurantsData title={DUMMY_DATA[0].title} image={DUMMY_DATA[0].image} address={DUMMY_DATA[0].address} description={DUMMY_DATA[0].description}/> */}
         <div>
-
+            <UserInputForm onGetData={getRestaurantData}/>
+            <RestaurantsData title={Restaurant.name} image={Restaurant.image_url} address={'Temporary Place Holder'} description={Restaurant.rating} />
         </div>
-    );
+    );}
+    
 }
 
 export default Home;
