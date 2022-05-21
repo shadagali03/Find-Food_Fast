@@ -1,6 +1,24 @@
-const API_KEY = 'v6uAY_EgJkxbvU6UhHKsiq_c56ikKv9Sa4ucIJMol5xcuhu2d8hZC8cihGU_bwrroN7PZuMq9Zqu25t6abk4hDzhlWi0nVFn4pBeCMo32qYPGRAqusOyEQ4Ga8mHYnYx'
-function RestaurantsData() {
-    
+import Card from './UI/Card.js';
+import classes from './RestaurantsData.module.css';
+
+function RestaurantsData(props) {
+   return (
+      <li className={classes.item}>
+      <Card>
+        <div className={classes.image}>
+          <img src={props.image} alt={props.title} />
+        </div>
+        <div className={classes.content}>
+          <h3>{props.title}</h3>
+          <address>{props.address}</address>
+          <p>{props.description}</p>
+        </div>
+        <div className={classes.actions}>
+          <button>To Favorites</button>
+        </div>
+      </Card>
+    </li> 
+   ); 
 }
 
 export default RestaurantsData;
