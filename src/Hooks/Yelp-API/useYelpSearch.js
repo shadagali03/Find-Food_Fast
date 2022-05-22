@@ -7,9 +7,10 @@ export function useYelpSearch(term, location, price) {
 
     useEffect(() => {
         setRestaurant({});
+        setSearchParams({term, location, price});
         const fetchData = async () => {
             try {
-                const rawData = await api.get('/businesses/search', searchParams);
+                const rawData = await api.get(searchParams);
                 const resp = await rawData.json();
                 setRestaurant(resp.businesses[0]);
             } catch(e) {
@@ -17,9 +18,9 @@ export function useYelpSearch(term, location, price) {
             }
         };
         fetchData();
-    }, [searchParams]);
+    }, [term, location, price]);
 
-    return [Restaurant, searchParams, setSearchParams];
+    return [Restaurant];
 
 
     
