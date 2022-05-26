@@ -12,6 +12,7 @@ export function useYelpSearch(term, location, price) {
             try {
                 const rawData = await api.get(searchParams);
                 const resp = await rawData.json();
+                //let randomNum = Math.floor(Math.random() * resp.businesses.length)
                 setRestaurant(resp.businesses[0]);
             } catch(e) {
                 console.error(e);
@@ -20,7 +21,7 @@ export function useYelpSearch(term, location, price) {
         fetchData();
     }, [term, location, price]);
 
-    return [Restaurant];
+    return Restaurant;
 
 
     

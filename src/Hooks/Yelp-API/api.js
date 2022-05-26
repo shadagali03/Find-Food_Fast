@@ -1,4 +1,4 @@
-import { API_BASE_URL, BEARER_TOKEN } from "./config";
+import { BEARER_TOKEN } from "./config";
 import QueryString from "qs";
 
 export function get(queryParams) {

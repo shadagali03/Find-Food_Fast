@@ -10,11 +10,11 @@ function RestaurantsData(props) {
         </div>
         <div className={classes.content}>
           <h3>{props.title}</h3>
-          <address>{props.address}</address>
-          <p>{props.description}</p>
+          <h3>{props.address}</h3>
+          <p>Rating: {props.description}</p>
         </div>
         <div className={classes.actions}>
-          <button>To Favorites</button>
+          <button>Add to Favorites</button>
         </div>
       </Card>
     </li> 
